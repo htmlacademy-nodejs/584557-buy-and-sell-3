@@ -1,7 +1,7 @@
 # Учебный проект «Куплю. Продам» [![Build status][travis-image]][travis-url]
 
-* Студент: [Igor Zorin](https://up.htmlacademy.ru/nodejs/3/user/584557).
-* Наставник: `Неизвестно`.
+- Студент: [Igor Zorin](https://up.htmlacademy.ru/nodejs/3/user/584557).
+- Наставник: [Андрей Сахаров](https://htmlacademy.ru/profile/id106477).
 
 ---
 
