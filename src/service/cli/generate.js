@@ -1,5 +1,7 @@
 "use strict";
 
+const path = require(`path`);
+
 const {nanoid} = require(`nanoid`);
 
 const fs = require(`fs`).promises;
@@ -11,10 +13,10 @@ const DEFAULT_COUNT = 1;
 const MAX_COMMENTS = 4;
 
 const FILE_NAME = `mocks.json`;
-const FILE_SENTENCES_PATH = `/data/sentences.txt`;
-const FILE_TITLES_PATH = `/data/titles.txt`;
-const FILE_CATEGORIES_PATH = `/data/categories.txt`;
-const FILE_COMMENTS_PATH = `/data/comments.txt`;
+const FILE_SENTENCES_PATH = path.join(`data`, `sentences.txt`);
+const FILE_TITLES_PATH = path.join(`data`, `titles.txt`);
+const FILE_CATEGORIES_PATH = path.join(`data`, `categories.txt`);
+const FILE_COMMENTS_PATH = path.join(`data`, `comments.txt`);
 
 const OfferType = {
   OFFER: `offer`,
@@ -34,7 +36,7 @@ const PictureRestrict = {
 const readContent = async (filePath) => {
   console.log(`readContent`, filePath);
   try {
-    const content = await fs.readFile(`${__dirname}/${filePath}`, `utf8`);
+    const content = await fs.readFile(path.join(__dirname, filePath), `utf8`);
     return content.trim().split(`\n`);
   } catch (err) {
     console.error(err);
@@ -73,14 +75,12 @@ const generateOffers = (count, titles, categories, sentences, comments) =>
 
 module.exports = {
   name: `--generate`,
-  async run(args) {
+  async run(count) {
     const sentences = await readContent(FILE_SENTENCES_PATH);
     const titles = await readContent(FILE_TITLES_PATH);
     const categories = await readContent(FILE_CATEGORIES_PATH);
     const comments = await readContent(FILE_COMMENTS_PATH);
-    // console.log(titles);
 
-    const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
     const content = JSON.stringify(
         generateOffers(countOffer, titles, categories, sentences, comments)
