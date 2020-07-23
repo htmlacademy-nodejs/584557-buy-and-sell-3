@@ -55,12 +55,15 @@ const generateComments = (count, comments) =>
 const getPictureFileName = (number) =>
   `item${number.toString().padStart(2, 0)}.jpg`;
 
-const generateOffers = (count, titles, categories, sentences, comments) =>
-  Array(count)
+const generateOffers = (count, titles, categories, sentences, comments) => {
+  const goodCategories = shuffle(categories);
+  goodCategories.length = getRandomInt(1, goodCategories.length);
+
+  return Array(count)
     .fill({})
     .map(() => ({
       id: nanoid(MAX_ID_LENGTH),
-      category: [categories[getRandomInt(0, categories.length - 1)]],
+      category: goodCategories,
       comments: generateComments(getRandomInt(1, MAX_COMMENTS), comments),
       description: shuffle(sentences).slice(1, 5).join(` `),
       picture: getPictureFileName(
@@ -72,6 +75,7 @@ const generateOffers = (count, titles, categories, sentences, comments) =>
       ],
       sum: getRandomInt(SumRestrict.MIN, SumRestrict.MAX),
     }));
+};
 
 module.exports = {
   name: `--generate`,
