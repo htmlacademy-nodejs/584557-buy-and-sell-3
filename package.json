@@ -20,6 +20,7 @@
   "homepage": "https://github.com/z0rig/584557-buy-and-sell-3#readme",
   "devDependencies": {
     "eslint": "7.3.1",
-    "eslint-config-htmlacademy": "0.5.2"
+    "eslint-config-htmlacademy": "0.5.2",
+    "nanoid": "3.1.10"
   }
 }
