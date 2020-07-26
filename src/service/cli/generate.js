@@ -56,12 +56,11 @@ const getPictureFileName = (number) =>
   `item${number.toString().padStart(2, 0)}.jpg`;
 
 const generateOffers = (count, titles, categories, sentences, comments) => {
-  const goodCategories = shuffle(categories);
-  goodCategories.length = getRandomInt(1, goodCategories.length);
+  return Array(count).fill({}).map(() => {
+    const goodCategories = shuffle(categories);
+    goodCategories.length = getRandomInt(1, goodCategories.length);
 
-  return Array(count)
-    .fill({})
-    .map(() => ({
+    return {
       id: nanoid(MAX_ID_LENGTH),
       category: goodCategories,
       comments: generateComments(getRandomInt(1, MAX_COMMENTS), comments),
@@ -74,7 +73,8 @@ const generateOffers = (count, titles, categories, sentences, comments) => {
         Math.floor(Math.random() * Object.keys(OfferType).length)
       ],
       sum: getRandomInt(SumRestrict.MIN, SumRestrict.MAX),
-    }));
+    };
+  });
 };
 
 module.exports = {
